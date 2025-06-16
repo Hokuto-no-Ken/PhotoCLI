@@ -4,7 +4,11 @@
 #include <string>
 #include <experimental/filesystem>
 #include <iostream>
-#include "CImg.h"
+#include <exiv2/exiv2.hpp>
+#include <iomanip>
+#include <memory>
+#include <fstream>
+
 namespace fs = std::experimental::filesystem;
 
 std::vector<fs::path> findFilesByExt(std::string constructed_path_str_dbg, std::string ext);
@@ -15,10 +19,13 @@ void openPhoto(std::vector<fs::path> &found_files, int file_index);
 
 void deletePhoto(std::vector<fs::path> &found_files, int file_index);
 
-void displayImageCImg(const std::vector<fs::path>& found_files, int file_index);
 
-void resizeImage(const std::vector<fs::path>& found_files, int file_index, int new_width, int new_height);
+void printMetadata(const fs::path& file_path);
 
-void convertToGrayscale(const std::vector<fs::path>& found_files, int file_index);
+void iptcprint(const fs::path& file_path);
 
-void applyBlur(const std::vector<fs::path>& found_files, int file_index, float sigma);
+
+void iptcWrite(const fs::path& file_path);
+
+void encryptPhotoMetaDate(const fs::path& filePath);
+void decryptPhotoMetaDate(const fs::path& filePath);
